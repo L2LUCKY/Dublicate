@@ -3,52 +3,48 @@ from AarohiX.core.userbot import Userbot
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
 from config import LOGGER_ID as LOG_ID
 from AarohiX import app
+from AarohiX import app  
 
 
-userbot = Userbot()
+photo = [
+    "https://te.legra.ph/file/758a5cf4598f061f25963.jpg",
+    "https://te.legra.ph/file/30a1dc870bd1a485e3567.jpg",
+    "https://te.legra.ph/file/d585beb2a6b3f553299d2.jpg",
+    "https://te.legra.ph/file/7df9e128dd261de2afd6b.jpg",
+    "https://te.legra.ph/file/f60ebb75ad6f2786efa4e.jpg",
+]
 
 
-async def new_message(chat_id: int, message: str, reply_markup=None):
-    await app.send_message(chat_id=chat_id, text=message, reply_markup=reply_markup)
+@app.on_message(filters.new_chat_members, group=2)
+async def join_watcher(_, message):    
+    chat = message.chat
+    link = await app.export_chat_invite_link(message.chat.id)
+    for members in message.new_chat_members:
+        if members.id == app.id:
+            count = await app.get_chat_members_count(chat.id)
 
-@app.on_message(filters.new_chat_members)
-async def on_new_chat_members(client: Client, message: Message):
-    if (await client.get_me()).id in [user.id for user in message.new_chat_members]:
-        added_by = message.from_user.mention if message.from_user else "ᴜɴᴋɴᴏᴡɴ ᴜsᴇʀ"
-        title = message.chat.title
-        username = f"@{message.chat.username}"
-        chat_id = message.chat.id
-        riruru = f"✫ <b><u>ɴᴇᴡ ɢʀᴏᴜᴘ</u></b> :\n\nᴄʜᴀᴛ ɪᴅ : {chat_id}\nᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ : {username}\nᴄʜᴀᴛ ᴛɪᴛʟᴇ : {title}\n\nᴀᴅᴅᴇᴅ ʙʏ : {added_by}"
-        reply_markup = InlineKeyboardMarkup([
-    [
-        InlineKeyboardButton(
-            message.from_user.first_name,
-            user_id=message.from_user.id
-        )
-    ]
-])
+            msg = (
+                f"📝 ᴍᴜsɪᴄ ʙᴏᴛ ᴀᴅᴅᴇᴅ ɪɴ ᴀ ɴᴇᴡ ɢʀᴏᴜᴘ\n\n"
+                f"____________________________________\n\n"
+                f"📌 ᴄʜᴀᴛ ɴᴀᴍᴇ: {message.chat.title}\n"
+                f"🍂 ᴄʜᴀᴛ ɪᴅ: {message.chat.id}\n"
+                f"🔐 ᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ: @{message.chat.username}\n"
+                f"🛰 ᴄʜᴀᴛ ʟɪɴᴋ: [ᴄʟɪᴄᴋ]({link})\n"
+                f"📈 ɢʀᴏᴜᴘ ᴍᴇᴍʙᴇʀs: {count}\n"
+                f"🤔 ᴀᴅᴅᴇᴅ ʙʏ: {message.from_user.mention}"
+            )
+            await app.send_photo(LOG_GROUP_ID, photo=random.choice(photo), caption=msg, reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton(f"sᴇᴇ ɢʀᴏᴜᴘ👀", url=f"{link}")]
+         ]))
 
-        
-        await new_message(LOG_ID, riruru, reply_markup)
+
 
 @app.on_message(filters.left_chat_member)
-async def on_left_chat_member(client: Client, message: Message):
-    if (await client.get_me()).id == message.left_chat_member.id:
-        remove_by = message.from_user.mention if message.from_user else "ᴜɴᴋɴᴏᴡɴ ᴜsᴇʀ"
+async def on_left_chat_member(_, message: Message):
+    if (await app.get_me()).id == message.left_chat_member.id:
+        remove_by = message.from_user.mention if message.from_user else "𝐔ɴᴋɴᴏᴡɴ 𝐔sᴇʀ"
         title = message.chat.title
-        username = f"@{message.chat.username}"
+        username = f"@{message.chat.username}" if message.chat.username else "𝐏ʀɪᴠᴀᴛᴇ 𝐂ʜᴀᴛ"
         chat_id = message.chat.id
-        rirurubye = f"✫ <b><u>ʟᴇғᴛ ɢʀᴏᴜᴘ</u></b> :\n\nᴄʜᴀᴛ ɪᴅ : {chat_id}\nᴄʜᴀᴛ ᴜsᴇʀɴᴀᴍᴇ : {username}\nᴄʜᴀᴛ ᴛɪᴛʟᴇ : {title}\n\nʀᴇᴍᴏᴠᴇᴅ ʙʏ : {remove_by}"
-        reply_markup = InlineKeyboardMarkup([
-    [
-        InlineKeyboardButton(
-            message.from_user.first_name,
-            user_id=message.from_user.id
-        )
-    ]
-])
-
-        
-        await new_message(LOG_ID, rirurubye, reply_markup)
-        await userbot.one.start()
-        await userbot.one.leave_chat(chat_id)
+        left = f"✫ <b><u>#𝐋ᴇғᴛ_𝐆ʀᴏᴜᴘ</u></b> ✫\n\n𝐂ʜᴀᴛ 𝐓ɪᴛʟᴇ : {title}\n\n𝐂ʜᴀᴛ 𝐈ᴅ : {chat_id}\n\n𝐑ᴇᴍᴏᴠᴇᴅ 𝐁ʏ : {remove_by}\n\n𝐁ᴏᴛ : @{app.username}"
+        await app.send_photo(LOG_GROUP_ID, photo=random.choice(photo), caption=left)
