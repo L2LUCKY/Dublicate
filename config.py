@@ -35,7 +35,7 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
-    "https://github.com/KRISHtg/queenmusicbot",
+    "https://github.com/istkharalam62/Istkhar_bot",
 )
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
 GIT_TOKEN = getenv(
@@ -44,8 +44,8 @@ GIT_TOKEN = getenv(
 
 
 
-SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Queen_update")
-SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/Queen_update")
+SUPPORT_CHANNEL = getenv("SUPPORT_CHANNEL", "https://t.me/Veena_Networks")
+SUPPORT_CHAT = getenv("SUPPORT_CHAT", "https://t.me/Istkhar_bot")
 
 AUTO_LEAVING_ASSISTANT = bool(getenv("AUTO_LEAVING_ASSISTANT", False))
 AUTO_SUGGESTION_MODE = getenv("AUTO_SUGGESTION_MODE", "True")
