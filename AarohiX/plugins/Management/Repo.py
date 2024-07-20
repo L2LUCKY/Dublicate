@@ -27,11 +27,11 @@ async def start(_, msg):
           InlineKeyboardButton("⦿ ᴀᴅᴅ ᴍᴇ ⦿", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")
         ],
         [
-          InlineKeyboardButton("ʜᴇʟᴘ", url="https://t.me/its_me_krish_tg"),
-          InlineKeyboardButton("ᴏᴡɴᴇʀ", url="https://t.me/Its_queen_tg"),
+          InlineKeyboardButton("ʜᴇʟᴘ", url="https://t.me/Veena_Networks"),
+          InlineKeyboardButton("ᴏᴡɴᴇʀ", url="https://t.me/ll_ISTKHAR_lll"),
         ],
         [
-          InlineKeyboardButton("ᴍᴜsɪᴄ ʙᴏᴛ ʀᴇᴘᴏ", url=f"https://github.com/KRISHtg/queenmusicbot"),
+          InlineKeyboardButton("ᴍᴜsɪᴄ ʙᴏᴛ ʀᴇᴘᴏ", url=f"https://telegra.ph/file/29cdfb228849916c1225f.mp4"),
         ]
     ]
     
